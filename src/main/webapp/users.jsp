@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
 <html lang="ru">
 <head>
     <title>Users</title>
