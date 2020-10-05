@@ -1,32 +1,29 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <html lang="ru">
 <head>
-    <title>Add new meal</title>
+    <title></title>
 </head>
 <body>
 <h3><a href="index.html">Home</a></h3>
 <div class="form-style-2">
-    <div class="form-style-2-heading">
-        Add new meal:
-    </div>
     <form method="POST" action="${pageContext.request.contextPath}/meals?commandName=addMeal">
+        <input type="text" hidden="true" name="id" value="<c:out value="${meal.id}" />"/>
         <div class="form-style-2 input-field">
             <label>Date and Time</label>
-            <input type="datetime-local" class="form-control" id="dateTime" name="dateTime" required>
+            <input type="datetime-local" id="dateTime" name="dateTime" value="<c:out value="${meal.dateTime}" />">
         </div>
         <div class="form-style-2 input-field">
             <label>Calories</label>
-            <input type="text" class="form-control" id="calories" name="calories" required>
+            <input type="text" class="form-control" id="calories" name="calories"
+                   value="<c:out value="${meal.calories}" />" required>
         </div>
         <div class="form-style-2 input-field">
             <label>Description</label>
-            <select id="description" class="form-control" name="description">
-                <option value="Завтрак"> Завтрак</option>
-                <option value="Обед"> Обед</option>
-                <option value="Ужин"> Ужин</option>
-                <option value="Другое"> Другое</option>
-            </select>
+            <input type="text" class="form-control" id="description" name="description"
+                   value="<c:out value="${meal.description}" />" required>
         </div>
         <div class="form-style-2 input[type=submit]">
             <button type="submit" class="btn btn-primary">Submit</button>

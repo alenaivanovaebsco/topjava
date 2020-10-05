@@ -21,6 +21,7 @@
         <th>Description</th>
         <th>Calories</th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -29,12 +30,8 @@
             <td>${m.dateTime}</td>
             <td>${m.description}</td>
             <td>${m.calories}</td>
-            <td>
-                <form id="formDelete" action="${pageContext.request.contextPath}/meals?commandName=delete" method="POST">
-                    <input type="hidden" name="mealId" value="${m.id}">
-                    <input class="btn btn-secondary btn-block" type="submit"
-                           value="delete"/></form>
-            </td>
+            <td><a href="${pageContext.request.contextPath}/meals?commandName=edit&mealId=<c:out value="${m.id}"/>">Update</a></td>
+            <td><a href="${pageContext.request.contextPath}/meals?commandName=delete&mealId=<c:out value="${m.id}"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>

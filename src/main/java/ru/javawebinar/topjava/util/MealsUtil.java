@@ -1,21 +1,22 @@
 package ru.javawebinar.topjava.util;
 
+import org.slf4j.Logger;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
+import static org.slf4j.LoggerFactory.getLogger;
 
 public class MealsUtil {
+    private static final Logger log = getLogger(MealsUtil.class);
 
     private static final AtomicBoolean DO_INSTANCE_EXIST = new AtomicBoolean(false);
     private static final Lock INSTANCE_LOCK = new ReentrantLock();
@@ -27,6 +28,7 @@ public class MealsUtil {
             INSTANCE_LOCK.lock();
             try {
                 if (meals == null) {
+                    log.info("initialize meals");
                     meals = new ArrayList<>();
                     meals.add(new Meal((long) 1, LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500));
                     meals.add(new Meal((long) 2, LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000));
@@ -50,6 +52,8 @@ public class MealsUtil {
     }
 
     public static List<MealTo> addedExcess(List<Meal> meals, int caloriesPerDay) {
+        log.info("add excess to meals");
+
         Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
                 .collect(
                         Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories))
